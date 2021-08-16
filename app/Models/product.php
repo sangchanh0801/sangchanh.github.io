@@ -29,5 +29,7 @@ class product extends Model
     public function category(){
         return $this->belongsTo('App\Models\category_product', 'category_id');
     }
-
+    public function carts(){
+        return $this->hasMany(Cart::class)->whereNotNull('order_id');
+    }
 }

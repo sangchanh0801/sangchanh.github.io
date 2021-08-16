@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\category_post;
 use App\Models\category_product;
 use App\Models\City;
@@ -76,7 +75,6 @@ class CheckoutController extends Controller
 
     public function confirmOrder(Request $request){
         $data = $request->all();
-
         if ($data['order_coupon'] != 'no') {
             $coupon = Coupon::where('coupon_code', $data['order_coupon'])->first();
             $coupon_mail = $coupon->coupon_code;
@@ -171,8 +169,5 @@ class CheckoutController extends Controller
 
 
 
-
-
-
-
+    
 }

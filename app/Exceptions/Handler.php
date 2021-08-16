@@ -2,6 +2,10 @@
 
 namespace App\Exceptions;
 
+use Exception;
+use Facade\FlareClient\Http\Response;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -38,4 +42,21 @@ class Handler extends ExceptionHandler
             //
         });
     }
+    // public function render($request, Throwable $e)
+    // {
+    //     if ($e instanceof ModelNotFoundException) {
+    //         return response()->json([
+    //             'errors'=> "PRODUCT NOT FOUND"
+    //         ], 404);
+    //     }
+    // }
+    public function render($request, Throwable $exception)
+{
+    if ($exception instanceof ModelNotFoundException) { 
+        return response()->json([
+            'error' => 'Entry for not found'], 404);
+    }
+
+    return parent::render($request, $exception);
+}
 }

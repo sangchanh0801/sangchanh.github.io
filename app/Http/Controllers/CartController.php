@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Helper;
 use App\Models\Cart;
 use App\Models\category_post;
 use App\Models\category_product;
@@ -14,6 +15,24 @@ use Illuminate\Support\Facades\Redirect;
 class CartController extends Controller
 {
 
+    // public function addCartAjax(Request $request){
+    //     $data = $request->all();
+    //     $cart = Cart::where('user_id', auth()->user()->id)->where('order_id',null)->where('product_id', $data['cart_product_id'])->first();
+    //     if ($cart==true) {
+    //         $is_avaiable = 0;
+    //         $cart->product_qty = $cart->product_qty + 1;
+    //         $cart->product_amount = $data['cart_product_price']+ $cart->product_amount;
+    //         $cart->save();
+    //     }else{
+    //         $cart = new Cart;
+    //         $cart->user_id = auth()->user()->id;
+    //         $cart->product_id = $data['cart_product_id'];
+    //         $cart->product_price = $data['cart_product_price'];
+    //         $cart->product_qty = $data['cart_product_qty'];
+    //         $cart->product_amount=($data['cart_product_price'] * $data['cart_product_qty']);
+    //         $cart->save();
+    //     }
+    // }
     public function addCartAjax(Request $request){
         $data = $request->all();
         $session_id = substr(md5(microtime()),rand(0,26),5);
@@ -53,7 +72,6 @@ class CartController extends Controller
                 'product_image' => $data['cart_product_image'],
                 'product_qty' => $data['cart_product_qty'],
                 'product_price' => $data['cart_product_price'],
-
             );
             Session::put('cart',$cart);
         }

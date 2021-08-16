@@ -13,6 +13,7 @@ class brand_product extends Model
         'brand_name',
         'brand_desc',
         'brand_image',
+        'brand_status'
     ];
     protected $primaryKey = 'brand_id';
 }

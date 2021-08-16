@@ -28,7 +28,6 @@ class BrandProduct extends Controller
     }
 
 //all_brand_product
-
     public function allBrandProduct(){
         $allbrand = brand_product::paginate(4);
         return view('admin.brand.all_brand_product', compact('allbrand'));
@@ -37,7 +36,6 @@ class BrandProduct extends Controller
     public function editBrandProduct(Request $request ,$brand_id){
         $edit_brand = brand_product::findOrFail($brand_id);
         return view('admin.brand.edit_brand_product', compact('edit_brand'));
-
     }
     public function updateBrandProduct(updateBrand $request ,$brand_id){
         $edit_brand= brand_product::findOrFail($brand_id);
@@ -55,12 +53,11 @@ class BrandProduct extends Controller
         return redirect()->route('allbrandproduct')->with('message', 'Bạn đã xóa danh mục sản phẩm thành công');
     }
 
-
-        public function viewBrand($brand_name){
-            $allcategory = category_product::get();
-            $allbrand = brand_product::get();
-            $brand_by_id = DB::table('products')->join('brand_products', 'products.brand_id', '=', 'brand_products.brand_name')->where('brand_products.brand_name', $brand_name)->get();
-            return view('users.brand')->with('allcategory', $allcategory)->with('allbrand', $allbrand)->with('brand_by_id', $brand_by_id);
+    public function viewBrand($brand_name){
+        $allcategory = category_product::get();
+        $allbrand = brand_product::get();
+        $brand_by_id = DB::table('products')->join('brand_products', 'products.brand_id', '=', 'brand_products.brand_name')->where('brand_products.brand_name', $brand_name)->get();
+        return view('users.brand')->with('allcategory', $allcategory)->with('allbrand', $allbrand)->with('brand_by_id', $brand_by_id);
         }
 
 //active and unactive

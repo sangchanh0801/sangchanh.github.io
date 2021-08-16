@@ -2,23 +2,26 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class cart extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'carts';
-    protected $fillable = ['cart_product_id','cart_order_id','cart_quantity','cart_amount','cart_price','cart_status'];
-    protected $primaryKey = 'cart_id';
-    public function product()
-    {
+    protected $fillable = [
+        'user_id',
+        'product_id',
+        'order_id',
+        'product_price',
+        'product_qty',
+        'product_amount',
+
+    ];
+    protected $primaryKey = 'id';
+    public function product(){
         return $this->belongsTo(product::class, 'product_id');
     }
-    public function order(){
-        return $this->belongsTo(order::class,'order_id');
-    }
-
 
 }
